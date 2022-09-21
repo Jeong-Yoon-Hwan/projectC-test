@@ -1,19 +1,19 @@
 import React,{Component} from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './Header.js';
-import Main from './Main';
+import { createGlobalStyle } from "styled-components";
 
+import Main from './Main';
+import ChatArea from "./ChatArea.js";
+import Header from "./Header.js";
+import "./index.css";
 
 const App = () =>{
     return (
-      <div>
-        <BrowserRouter>
-          <Header/>
-          <Routes>
-            <Route path="/" element={<Main/>}></Route>
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <>
+          <Main>
+          </Main>
+          <ChatArea></ChatArea>
+      </>
     )
 }
 
