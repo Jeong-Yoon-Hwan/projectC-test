@@ -13,16 +13,21 @@ const LoginBox = styled.div`
   gap:22px;
 `;
 
+
+
+
 //로그인 폼 작성
 const LoginForm = () => {
   return(
-    <LoginBox>
-      <InputBoxs text="아이디를 입력하세요"/>
-      <InputBoxs text="비밀번호를 입력하세요"/>
-      <Buttons text="로그인"/>
-      <Buttons text="아이디 / 비밀번호 찾기"/>
-      <Buttons color="none" text="회원가입"/>
-    </LoginBox>
+    <form>
+      <LoginBox>
+        <InputBoxs text="아이디를 입력하세요"/>
+        <InputBoxs text="비밀번호를 입력하세요"/>
+        <Buttons text="로그인"/>
+        <Buttons text="아이디 / 비밀번호 찾기"/>
+        <Buttons color="none" text="회원가입"/>
+      </LoginBox>
+    </form>
   )
 }
 

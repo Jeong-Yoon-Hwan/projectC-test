@@ -11,10 +11,13 @@ const Button = styled.button`
   font-weight:bold;
 `
 
+
+
 const Buttons = (props) =>{
   return(
     <>
-      <Button color={props.color}>{props.text}</Button>
+      <Button color={props.color}>{props.text}
+      </Button>
     </>
   )
 }

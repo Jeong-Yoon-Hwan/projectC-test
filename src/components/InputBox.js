@@ -15,7 +15,9 @@ const InputBox = styled.input`
 const InputBoxs = (props) =>{
   return(
     <>
-      <InputBox placeholder={props.text}></InputBox>
+      <InputBox placeholder={props.text}>
+
+      </InputBox>
     </>
   )
 }
