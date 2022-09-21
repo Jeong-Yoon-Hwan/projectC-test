@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import Header from './Header.js';
+import Header from '../components/Header.js';
 import styled from 'styled-components';
 
 const MainBox = styled.div`
-  width:80vw;
+  width:calc(100vw - 400px); 
   height:100vh; 
 `;
 
@@ -16,7 +16,6 @@ const ContentBox = styled.div`
   align-items:center;
   background:beige;
 `
-
 
 const Main = (props) => {
 	return (

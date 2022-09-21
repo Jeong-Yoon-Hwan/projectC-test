@@ -2,9 +2,9 @@ import React,{Component} from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createGlobalStyle } from "styled-components";
 
-import Main from './Main';
-import ChatArea from "./ChatArea.js";
-import Header from "./Header.js";
+import Main from './layout/Main';
+import SideArea from "./layout/SideArea.js";
+import Header from "./components/Header.js";
 import "./index.css";
 
 const App = () =>{
@@ -12,7 +12,7 @@ const App = () =>{
       <>
           <Main>
           </Main>
-          <ChatArea></ChatArea>
+          <SideArea></SideArea>
       </>
     )
 }
