@@ -17,5 +17,5 @@ const Logo = () =>{
     </LogoBox> 
   )
 }
-
+  
 export default Logo;
