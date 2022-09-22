@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-
-
+// Ul 스타일지정
 const Ul = styled.ul`
   width:max-content;
   height:10vh;
@@ -25,10 +24,10 @@ const Ul = styled.ul`
   }
 `
 
-
 const Navigation = () =>{
   return(
     <>
+    {/* 링크 값 입력되면 라우터 페이지에서 받아서 처리됨 */}
       <Ul>
         <li><Link to="/">거래소</Link></li>
         <li><Link to="/trading">자동매매설정</Link></li>

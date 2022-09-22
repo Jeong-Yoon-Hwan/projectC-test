@@ -37,16 +37,18 @@ function getPostData(){
 const Main = (props) => {
 	return (
       <BrowserRouter>
-        <Header/>
-      <MainBox>
-        <Routes>
-          <Route path="/" element={<Chart/>}></Route>
-          <Route path="/news" element={<News/>}></Route>
-          <Route path="/trading" element={<Trading/>}></Route>
-          <Route path="/info" element={<Info/>}></Route>
-          <Route path="/board" element={<Board/>}></Route>
-        </Routes>
-      </MainBox>
+      {/* 헤더 고정 */}
+        <Header/> 
+      {/* 메인박스 지정하고 라우터 설정 */}
+        <MainBox>
+          <Routes>
+            <Route path="/" element={<Chart/>}></Route>
+            <Route path="/news" element={<News/>}></Route>
+            <Route path="/trading" element={<Trading/>}></Route>
+            <Route path="/info" element={<Info/>}></Route>
+            <Route path="/board" element={<Board/>}></Route>
+          </Routes>
+        </MainBox>
       </BrowserRouter>
     
 	);
