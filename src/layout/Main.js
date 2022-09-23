@@ -15,24 +15,6 @@ const MainBox = styled.div`
 
 `;
 
-function getPostData(){
-  const xhr = new XMLHttpRequest();
-  
-  xhr.open("GET",'http://localhost:3001/login');
-  xhr.setRequestHeader("content-type","application/json");
-  xhr.send();
-
-  xhr.onload = () =>{
-    if(xhr.status ===200){
-      const res = JSON.parse(xhr.response);
-      console.log(res);
-      
-    }else{
-      console.log(xhr.status, xhr.statusText);
-    }
-  }
-}getPostData();
-
 
 const Main = (props) => {
 	return (

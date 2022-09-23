@@ -20,7 +20,6 @@ const LoginArea = () =>{
       <LoginBox>
         <Logo/>
         <LoginForm/>
-
       </LoginBox>
     </>
   )

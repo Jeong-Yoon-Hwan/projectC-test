@@ -1,5 +1,7 @@
+import axios from "axios";
 import React from "react";
 import styled from "styled-components";
+import { useState } from "react";
 
 
 const LoginBox = styled.div`
@@ -33,55 +35,51 @@ const Button = styled.button`
   font-weight:bold;
 `
 
-const LoginHandle= (event) =>{
-  
-  const id = document.getElementById("id").value;
-  const pw = document.getElementById('password').value;
-  //alert(`아이디: ${id}, 비밀번호: ${pw}`);
-
-
-
-  //데이터 전송 부분//
-  const xhr = new XMLHttpRequest();
-
-  xhr.open("POST","http://localhost:3001/login");
-  xhr.setRequestHeader("content-type","application/json; charset=UTF-8");
-  
-  const data = {id:`${id}`, pw:`${pw}`};
-  if(id===""||pw===""){
-    alert("아이디와 비밀번호를 입력하세요");
-  }else{
-    xhr.send(JSON.stringify(data));
-  
-    xhr.onload = () =>{
-      if(xhr.status === 201){
-        const res  = JSON.parse(xhr.response);
-        console.log(res);
-      }else{
-        console.log(xhr.status, xhr.statusText);
-      }
-    }
-  }
-  
+const Countet = () =>{
+  const [value,setValue] = useState(0);
 }
 
-//*데이터 가져오기
-function getPostData(){
-  const xhr = new XMLHttpRequest();
+function LoginHandle(e){
+  e.preventDefault();
   
-  xhr.open("GET","http://localhost:3001/login");
-  xhr.setRequestHeader("content-type","application/json");
-  xhr.send();
-
-  xhr.onload = () =>{
-    if(xhr.status ===200){
-      const res = JSON.parse(xhr.response);
-      console.log(res);
+   const id = document.getElementById("id").value;
+   const pw = document.getElementById('password').value;
+  
+  axios.get("http://localhost:3001/login").then((response)=>{
+    console.log(response.data);
+    if(response.data.find((mem)=> mem.id===id)){
+      alert("일치합니다");
     }else{
-      console.log(xhr.status, xhr.statusText);
+      alert("틀렸습니다");
     }
-  }
+  }).catch((error)=>{
+    console.log(error);
+  })
+}
+
+function getPostData(){
+  axios.get("http://localhost:3001/login").then((response)=>{
+    console.log(response.data);
+  })
 }getPostData();
+
+// // //*데이터 가져오기
+// function getPostData(){
+//   const xhr = new XMLHttpRequest();
+  
+//   xhr.open("GET","http://localhost:3001/login");
+//   xhr.setRequestHeader("content-type","application/json");
+//   xhr.send();
+
+//   xhr.onload = () =>{
+//     if(xhr.status ===200){
+//       const res = JSON.parse(xhr.response);
+//       console.log(res);
+//     }else{
+//       console.log(xhr.status, xhr.statusText);
+//     }
+//   }
+// }getPostData();
 
 
 
@@ -96,7 +94,8 @@ const LoginForm = () => {
             id="id" 
             name="id" 
             placeholder="아이디를 입력하세요" 
-            autocomplete="off"
+            autocomplete="off" 
+            
           />
           <InputBox 
             type="password" 
