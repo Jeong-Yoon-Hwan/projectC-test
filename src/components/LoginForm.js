@@ -39,11 +39,13 @@ const Countet = () =>{
   const [value,setValue] = useState(0);
 }
 
+
+//로그인
 function LoginHandle(e){
   e.preventDefault();
   
-   const id = document.getElementById("id").value;
-   const pw = document.getElementById('password').value;
+  const id = document.getElementById("id").value;
+  const pw = document.getElementById('password').value;
   
   axios.get("http://localhost:3001/login").then((response)=>{
     console.log(response.data);
@@ -63,25 +65,11 @@ function getPostData(){
   })
 }getPostData();
 
-// // //*데이터 가져오기
-// function getPostData(){
-//   const xhr = new XMLHttpRequest();
+
+
+function test(){
   
-//   xhr.open("GET","http://localhost:3001/login");
-//   xhr.setRequestHeader("content-type","application/json");
-//   xhr.send();
-
-//   xhr.onload = () =>{
-//     if(xhr.status ===200){
-//       const res = JSON.parse(xhr.response);
-//       console.log(res);
-//     }else{
-//       console.log(xhr.status, xhr.statusText);
-//     }
-//   }
-// }getPostData();
-
-
+}
 
 //로그인 폼 작성
 const LoginForm = () => {
@@ -105,7 +93,7 @@ const LoginForm = () => {
             autocomplete="off" 
           />
           <Button type="submit">로그인</Button>
-          <Button type="button">아이디 / 비밀번호찾기</Button>
+          <Button type="button" onClick={test}>아이디 / 비밀번호찾기</Button>
           <Button type="button" color="none">회원가입</Button>
         </LoginBox>
       </form>
