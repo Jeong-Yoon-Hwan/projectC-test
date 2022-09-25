@@ -8,6 +8,7 @@ const LogoBox = styled.div`
   display:flex;
   justify-content:center;
   align-items:end;
+  margin-bottom:20px;
 `;
 
 const Logo = () =>{
