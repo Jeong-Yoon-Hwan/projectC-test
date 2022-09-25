@@ -29,7 +29,6 @@ const SinUpBox = styled.div`
 `;
 
 
-
 const SingUp = () =>{
   return (
     <SinUpBox>

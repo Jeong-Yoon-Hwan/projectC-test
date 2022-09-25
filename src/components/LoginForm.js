@@ -48,29 +48,41 @@ const Countet = () =>{
 
 
 //로그인
-function LoginHandle(e){
-  e.preventDefault();
+// function LoginHandle(e){
+//   e.preventDefault();
   
-  const id = document.getElementById("id").value;
-  const pw = document.getElementById('password').value;
+//   const id = document.getElementById("id").value;
+//   const pw = document.getElementById('password').value;
   
-  axios.get("http://localhost:3001/login").then((response)=>{
-    console.log(response.data);
-    if(response.data.find((mem)=> mem.id===id)){
-      alert("일치합니다");
-    }else{
-      alert("틀렸습니다");
-    }
-  }).catch((error)=>{
-    console.log(error);
-  })
-}
-
-// function getPostData(){
 //   axios.get("http://localhost:3001/login").then((response)=>{
 //     console.log(response.data);
+//     if(response.data.find((mem)=> mem.id===id)){
+//       alert("일치합니다");
+//     }else{
+//       alert("틀렸습니다");
+//     }
+//   }).catch((error)=>{
+//     console.log(error);
 //   })
-// }getPostData();
+// }
+
+function getPostData(){
+  axios.get("http://localhost:3001/login").then((response)=>{
+    console.log(response.data);
+  })
+}getPostData();
+
+function LoginHandle(e){
+  e.preventDefault();
+  axios.post("http://localhost:3001/login",{
+    id:"yonk1j313dd3",
+    pw:"1244",
+  }).then((resonse)=>{
+    alert("success");
+  }).catch((error)=>{
+    alert(1);
+  })
+}
 
 
 
@@ -81,9 +93,7 @@ function test(){
 //로그인 폼 작성
 const LoginForm = () => {
   return(
-   
     <>
-     
         <LoginBox>
         <form action="#" name="LoginForm" onSubmit={LoginHandle}>
           <input 
@@ -103,7 +113,6 @@ const LoginForm = () => {
           </form>
           <Button type="button" onClick={test}>아이디 / 비밀번호찾기</Button>
           <Button type="button" color="none"><Link to="/signUp">회원가입</Link></Button>
-         
         </LoginBox>
         
     </>
