@@ -4,11 +4,10 @@ import "../../src/index.css"
 
 const LogoBox = styled.div`
   width:230px;
-  height:60px;
+  height:10vh;
   display:flex;
   justify-content:center;
-  align-items:end;
-  margin-bottom:20px;
+  align-items:center;
 `;
 
 const Logo = () =>{

@@ -1,56 +1,30 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "email": "fsc13@naver.com",
+      "password": "1234",
+      "userName": "정윤환",
+      "userId": "yoon"
+    },
+    {
+      "userId": "wjddbsghks",
+      "password": "1234",
+      "email": "f@naver.com",
+      "userName": "정윤환",
+      "id": 2
+    }
+  ],
   "login": [
     {
-      "id": "1",
-      "pw": "pw"
+      "email": "fsc13@naver.com",
+      "password": "1234",
+      "id": 1
     },
     {
-      "id": "javascript",
-      "pw": "123"
-    },
-    {
-      "id": "yoon",
-      "pw": "1234"
-    },
-    {
-      "id": "yoonhwan",
-      "pw": "1234"
-    },
-    {
-      "id": "dfdfdf",
-      "pw": "133123213"
-    },
-    {
-      "id": "yoon123",
-      "pw": "123123"
-    },
-    {
-      "id": "12345",
-      "pw": "12323"
-    },
-    {
-      "id": "yh1234",
-      "pw": "123123"
-    },
-    {
-      "id": "h123",
-      "pw": "hjkk"
-    },
-    {
-      "id": "yonk1j",
-      "pw": "1244"
-    },
-    {
-      "id": "yonk1j33",
-      "pw": "1244"
-    },
-    {
-      "id": "yonk1j3133",
-      "pw": "1244"
-    },
-    {
-      "id": "yonk1j313dd3",
-      "pw": "1244"
+      "email": "fsc13@naver.com",
+      "password": "1234",
+      "id": 2
     }
   ]
 }
