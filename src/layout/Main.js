@@ -12,9 +12,7 @@ const MainBox = styled.div`
   width:calc(100vw - 400px); 
   height:90vh; 
   background-color:white;
-
 `;
-
 
 const Main = (props) => {
 	return (

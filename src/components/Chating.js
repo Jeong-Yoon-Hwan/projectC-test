@@ -8,7 +8,7 @@ const ChatingBox = styled.div`
   & > main {
     width: inherit;
     height:calc(100% - 50px);
-    background-color:beige;
+    background-color:#f1f1f1;
     display:flex;
     justify-content:end;
   }
@@ -74,8 +74,10 @@ const Chating = () => {
     newBox.style.padding ="10px";
     newBox.style.margin="10px";
     newBox.style.width="max-content";
-    newBox.style.height="50px";
+    newBox.style.maxWidth="200px";
+    newBox.style.height="max-content";
     newBox.style.fontWeight="bold";
+    newBox.style.fontSize="14px";
     newBox.style.display="flex";
     newBox.style.alignItems="center";
     Box.current.appendChild(newBox);

@@ -78,7 +78,6 @@ const LoginForm = () => {
       ...formData,
       [event.target.name] : event.target.value
     })
-    
   }
 
   return(

@@ -30,7 +30,6 @@ const SideArea = () =>{
              <Route path ="/" element={<Chating/>}></Route>
              :<Route path ="/" element={<LoginForm/>}></Route>
           }
-         
           <Route path="/register" element={<Register/>}></Route>
         </Routes>
       </BrowserRouter>
