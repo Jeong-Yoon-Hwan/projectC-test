@@ -51,7 +51,8 @@ function getPostData(){
   axios.get("http://localhost:3001/users").then((response)=>{
     console.log(response.data);
   })
-}getPostData();
+}
+// getPostData();
 
 
 //로그인 폼 작성
