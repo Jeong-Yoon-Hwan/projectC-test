@@ -5,6 +5,7 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import { BrowserRouter, Link } from "react-router-dom";
+import { motion } from "framer-motion"
 
 
 const LoginBox = styled.div`
@@ -91,7 +92,13 @@ const LoginForm = () => {
   }
 
   return(
-    <>
+ 
+    <motion.div
+    className="registerPage"
+    initial={{opacity:0}}
+    animate={{opacity:1}}
+    exit={{opacity:0}}
+    >
         <LoginBox>
         <form action="#" className="login-form" onSubmit={event=>handleSubmit(event)}>
           <input 
@@ -110,11 +117,11 @@ const LoginForm = () => {
           />
           <Button className= 'login-btn' type="submit">로그인</Button>
           </form>
-          <Button type="button" >아이디 / 비밀번호찾기</Button>
+          <Button type="button"><Link to="/userFind">아이디 / 비밀번호찾기</Link></Button>
           <Button type="button" color="none"><Link to="/register">회원가입</Link></Button>
         </LoginBox>
-        
-    </>
+      </motion.div>
+    
   )
 }
 

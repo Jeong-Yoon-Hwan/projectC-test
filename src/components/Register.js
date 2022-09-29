@@ -4,6 +4,7 @@ import React,{useState} from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const SinUpBox = styled.div`
   width:230px;
@@ -69,29 +70,36 @@ const Register = () =>{
   }
 
   return (
-    <SinUpBox>
-      <form>
-        <input type="text" 
-              name="userName"
-              placeholder="이름"
-              onChange={inputChangeHandler}/>
-        <input type="text" 
-              name="userId"
-              placeholder="아이디"
-              onChange={inputChangeHandler}/>
-        <input type="text" 
-              name="password"
-              placeholder="비밀번호"
-              onChange={inputChangeHandler}/>
-        
-        <input type="text"
-              name="email"
-              placeholder="이메일"
-              onChange={inputChangeHandler}/>
-        <button onClick={doSignUp}>가입하기</button>
-      </form>
-      <button><Link to ="/">로그인 페이지로 돌아가기</Link></button>
-    </SinUpBox>
+    <motion.div
+      className="registerPage"
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{opacity:0}}
+    >
+      <SinUpBox>
+        <form>
+          <input type="text" 
+                name="userName"
+                placeholder="이름"
+                onChange={inputChangeHandler}/>
+          <input type="text" 
+                name="userId"
+                placeholder="아이디"
+                onChange={inputChangeHandler}/>
+          <input type="text" 
+                name="password"
+                placeholder="비밀번호"
+                onChange={inputChangeHandler}/>
+          
+          <input type="text"
+                name="email"
+                placeholder="이메일"
+                onChange={inputChangeHandler}/>
+          <button onClick={doSignUp}>가입하기</button>
+        </form>
+        <button><Link to ="/">로그인 페이지로 돌아가기</Link></button>
+      </SinUpBox>
+    </motion.div>
   )
 }
 

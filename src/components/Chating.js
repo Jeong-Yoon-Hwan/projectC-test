@@ -87,7 +87,7 @@ const Chating = () => {
     Box.current.style.flexDirection="column";
     Box.current.style.justifyContent="end";
     Box.current.style.alignItems="end";
-   
+    clearInput();
   }
 
   const onEnter = (e) =>{

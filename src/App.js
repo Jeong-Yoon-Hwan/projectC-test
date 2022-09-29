@@ -3,6 +3,7 @@ import Main from './layout/Main';
 import SideArea from "./layout/SideArea.js";
 import "./index.css";
 
+
 const App = () =>{
     return (
       <>
