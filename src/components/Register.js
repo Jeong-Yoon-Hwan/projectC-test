@@ -1,3 +1,5 @@
+//회원가입 폼 
+
 import React,{useState} from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -31,6 +33,8 @@ const SinUpBox = styled.div`
     }
 `;
 
+
+
 const Register = () =>{
 
   const [inputValue,setInputValue] = useState({
@@ -48,7 +52,6 @@ const Register = () =>{
   }
 
   const doSignUp = async () =>{
-    
     axios({
       url: "http://localhost:3001/users",
       method : "POST",
