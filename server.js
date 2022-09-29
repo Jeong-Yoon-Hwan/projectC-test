@@ -18,10 +18,9 @@ app.get("/", (req, res) => {
 });
 
 io.on("connect", (socket) => {
-  
     socket.on("message", (data) => {
+        console.log(data);
         io.emit("message", data);
-        console.log(1);
     });
 });
 

@@ -42,10 +42,6 @@ const Button = styled.button`
   font-weight:bold;
 `
 
-const Countet = () =>{
-  const [value,setValue] = useState(0);
-}
-
 //로그인
 function getPostData(){
   axios.get("http://localhost:3001/users").then((response)=>{
@@ -59,19 +55,30 @@ function getPostData(){
 const LoginForm = () => {
 
   const [formData,setFormData] = useState({
-    email:'',
+    id:'',
     password:''
   })
 
+  //아이디 비밀번호 값 보내기
   function handleSubmit(event){
     event.preventDefault();
-    fetch("http://localhost:3001/login",{
-      method:"POST",
-      headers:{"Content-Type" : "application/json"},
-      body: JSON.stringify(formData)
+
+    if(formData.id===""||formData.password===""){
+      alert("아이디와 비밀번호가 입력되지 않았습니다");
+    }
+    axios({
+      url: 'http://localhost:3001/login',
+      method: 'POST',
+      data: {
+        userId: formData.id,
+        password:formData.password	
+      }
+    }).then(function (response) { 
+      console.log(response) 
     })
-    .then(res => res.json())
-    .then(data=>console.log(data))
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   function handleChange(event){
@@ -87,9 +94,9 @@ const LoginForm = () => {
         <form action="#" className="login-form" onSubmit={event=>handleSubmit(event)}>
           <input 
             type="text" 
-            name="email" 
+            name="id" 
             placeholder="아이디를 입력하세요" 
-            value={formData.email}
+            value={formData.id}
             onChange={event=>handleChange(event)}
           />
           <input 

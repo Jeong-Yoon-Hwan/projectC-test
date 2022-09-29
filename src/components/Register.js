@@ -31,32 +31,38 @@ const SinUpBox = styled.div`
     }
 `;
 
-
 const Register = () =>{
 
   const [inputValue,setInputValue] = useState({
     userId:'',
+    userName:'',
     password:'',
     email:'',
   })
 
   const inputChangeHandler = (e) => {
-    const {name, value} = e.target
     setInputValue({
       ...inputValue,
-      [name]:value,
+      [e.target.name] : e.target.value
     })
   }
 
   const doSignUp = async () =>{
-    try{
-      const { data } = await axios.post('http://localhost:3001/users',
-      inputValue,
-      )
-      console.log(data);
-    } catch(error) {
+    
+    axios({
+      url: "http://localhost:3001/users",
+      method : "POST",
+      data: {
+        userId : inputValue.userId,
+        password : inputValue.password,
+        email : inputValue.email,
+        userName : inputValue.userName
+      }
+    }).then(function(response){
+      console.log(response)
+    }).catch(function(error){
       console.log(error);
-    }
+    })
   }
 
   return (

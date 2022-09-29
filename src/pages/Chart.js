@@ -10,7 +10,10 @@ const socket = io.connect("http://localhost:8080");
 
 const sendMessage = () =>{
   
-  socket.emit("message","hi");
+  socket.emit("message",{name:'hi'});
+  socket.on("welcome",(msg)=>{
+    console.log(msg);
+  })
 }
 
   return(
