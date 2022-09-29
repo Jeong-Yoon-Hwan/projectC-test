@@ -11,6 +11,7 @@ const ChatingBox = styled.div`
     background-color:#f1f1f1;
     display:flex;
     justify-content:end;
+    overflow:hidden;
   }
   & > section{
     width:inherit;
@@ -80,6 +81,7 @@ const Chating = () => {
     newBox.style.fontSize="14px";
     newBox.style.display="flex";
     newBox.style.alignItems="center";
+    newBox.style.wordBreak="break-all";
     Box.current.appendChild(newBox);
     Box.current.style.display="flex";
     Box.current.style.flexDirection="column";
