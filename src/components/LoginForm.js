@@ -27,16 +27,6 @@ const LoginBox = styled.div`
   }
 `;
 
-//텍스트 박스 스타일 정의
-const InputBox = styled.input`
-  width:228px;
-  height:44px;
-  background:white;
-  border-radius:2px;
-  border:none;
-  outline:none;
-  padding:10px;
-`
 const Button = styled.button`
   width:228px;
   height:44px;
@@ -79,8 +69,8 @@ const LoginForm = () => {
       }
     }).then(function (response) { 
       console.log(response.data.token)
-      
-      //로그인 성공하면 token,nickname 받아와서 로컬스토리지에 저장함//
+
+      //* 로그인 성공하면 token,nickname 받아와서 로컬스토리지에 저장함//
       localStorage.setItem("token",response.data.token);
       localStorage.setItem("nickname",response.data.nickname);
       location.reload();
@@ -88,6 +78,8 @@ const LoginForm = () => {
     .catch(function (error) {
       console.log(error);
     });
+
+    
 
   }
 
@@ -118,10 +110,14 @@ const LoginForm = () => {
           </form>
           <Button type="button"><Link to="/userFind">아이디 / 비밀번호찾기</Link></Button>
           <Button type="button" color="none"><Link to="/signUp">회원가입</Link></Button>
+          
         </LoginBox>
       </motion.div>
     
   )
 }
+
+
+
 
 export default LoginForm;

@@ -1,5 +1,6 @@
 import React,{useRef,useState} from "react"
 import styled from "styled-components"
+import axios from "axios"
 
 const ChatingBox = styled.div`
   width:inherit ;
@@ -68,6 +69,9 @@ const Chating = () => {
 
 
   const onSubmit = () =>{  
+    if(inputValue.chat === ""){
+      alert("채팅 안치셨어요");
+    }else{
     let newBox = document.createElement('div');
     newBox.textContent=`${inputValue.chat}`; //new Box에 채팅 인풋에 입력한 값으로 추가
     newBox.style.backgroundColor="#F2DA46";
@@ -87,7 +91,9 @@ const Chating = () => {
     Box.current.style.flexDirection="column";
     Box.current.style.justifyContent="end";
     Box.current.style.alignItems="end";
+    }
     clearInput();
+    
   }
 
   const onEnter = (e) =>{
@@ -112,11 +118,32 @@ const Chating = () => {
           ref={inputRef}
         />
         <button onClick={onSubmit}>보내기</button>
+        
       </section>
     </ChatingBox>
     
   )
 
 }
+
+
+window.onload = ()=>{
+  axios({
+    url: 'http://localhost:5858/auth/inspect',
+    method: 'POST',
+    data: {
+      nickname: localStorage.getItem("nickname"),
+      token: localStorage.getItem("token")
+    }
+  }).then(function (response) { 
+    console.log(response)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+
+
 
 export default Chating;
