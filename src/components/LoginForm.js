@@ -47,44 +47,13 @@ const Button = styled.button`
   font-weight:bold;
 `
 
-//로그인
-function getPostData(){
-  axios.get("http://localhost:3001/users").then((response)=>{
-    console.log(response.data);
-  })
-}
-// getPostData();
-
-
 //로그인 폼 작성
 const LoginForm = () => {
 
   const [formData,setFormData] = useState({
-    id:'',
+    nickname:'',
     password:''
   })
-
-  //아이디 비밀번호 값 보내기
-  function handleSubmit(event){
-    event.preventDefault();
-
-    if(formData.id===""||formData.password===""){
-      alert("아이디와 비밀번호가 입력되지 않았습니다");
-    }
-    axios({
-      url: 'http://localhost:3001/login',
-      method: 'POST',
-      data: {
-        userId: formData.id,
-        password:formData.password	
-      }
-    }).then(function (response) { 
-      console.log(response) 
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
 
   function handleChange(event){
     setFormData({
@@ -93,8 +62,36 @@ const LoginForm = () => {
     })
   }
 
+
+  //아이디 비밀번호 값 보내기
+  function handleSubmit(event){
+    event.preventDefault();
+
+    if(formData.nickname===""||formData.password===""){
+      alert("아이디와 비밀번호가 입력되지 않았습니다");
+    }
+    axios({
+      url: 'http://localhost:5858/auth/login',
+      method: 'POST',
+      data: {
+        nickname: formData.nickname,
+        password:formData.password	
+      }
+    }).then(function (response) { 
+      console.log(response.data.token)
+      
+      //로그인 성공하면 token,nickname 받아와서 로컬스토리지에 저장함//
+      localStorage.setItem("token",response.data.token);
+      localStorage.setItem("nickname",response.data.nickname);
+      location.reload();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  }
+
   return(
- 
     <motion.div
     className="registerPage"
     initial={{opacity:0}}
@@ -105,9 +102,9 @@ const LoginForm = () => {
         <form action="#" className="login-form" onSubmit={event=>handleSubmit(event)}>
           <input 
             type="text" 
-            name="id" 
+            name="nickname" 
             placeholder="아이디를 입력하세요" 
-            value={formData.id}
+            value={formData.nickname}
             onChange={event=>handleChange(event)}
           />
           <input 

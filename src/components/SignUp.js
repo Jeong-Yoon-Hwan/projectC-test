@@ -39,8 +39,8 @@ const SinUpBox = styled.div`
 const SignUp = () =>{
 
   const [inputValue,setInputValue] = useState({
-    userId:'',
-    userName:'',
+    nickName:'',
+    name:'',
     password:'',
     email:'',
   })
@@ -57,10 +57,10 @@ const SignUp = () =>{
       url: "http://localhost:3001/users",
       method : "POST",
       data: {
-        userId : inputValue.userId,
+        nickName : inputValue.nickName,
         password : inputValue.password,
         email : inputValue.email,
-        userName : inputValue.userName
+        name : inputValue.name
       }
     }).then(function(response){
       console.log(response)
@@ -79,11 +79,11 @@ const SignUp = () =>{
       <SinUpBox>
         <form>
           <input type="text" 
-                name="userName"
+                name="name"
                 placeholder="이름"
                 onChange={inputChangeHandler}/>
           <input type="text" 
-                name="userId"
+                name="nickName"
                 placeholder="아이디"
                 onChange={inputChangeHandler}/>
           <input type="text" 
