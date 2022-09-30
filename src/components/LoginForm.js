@@ -22,6 +22,8 @@ const LoginBox = styled.div`
     height:44px;
     margin-bottom:22px;
     padding:10px;
+    border:0;
+    border-radius:2px;
   }
 `;
 
@@ -96,7 +98,7 @@ const LoginForm = () => {
     <motion.div
     className="registerPage"
     initial={{opacity:0}}
-    animate={{opacity:1}}
+    animate={{opacity:1,transition:"2s"}}
     exit={{opacity:0}}
     >
         <LoginBox>
@@ -118,7 +120,7 @@ const LoginForm = () => {
           <Button className= 'login-btn' type="submit">로그인</Button>
           </form>
           <Button type="button"><Link to="/userFind">아이디 / 비밀번호찾기</Link></Button>
-          <Button type="button" color="none"><Link to="/register">회원가입</Link></Button>
+          <Button type="button" color="none"><Link to="/signUp">회원가입</Link></Button>
         </LoginBox>
       </motion.div>
     

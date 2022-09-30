@@ -38,7 +38,7 @@ const UserFind = () =>{
     <motion.div
       className="registerPage"
       initial={{opacity:0}}
-      animate={{opacity:1}}
+      animate={{opacity:1,transition:"2s"}}
       exit={{opacity:0}}
     >
     <FindForm>

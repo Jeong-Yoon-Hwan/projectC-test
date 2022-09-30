@@ -3,11 +3,10 @@ import styled from 'styled-components';
 import LoginArea from '../pages/LoginArea';
 import LoginForm from '../components/LoginForm';
 import Logo from '../components/logo';
-import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import Register from '../components/Register';
+import { BrowserRouter,Routes,Route, useLocation } from 'react-router-dom';
+import Register from '../components/SignUp';
 import Chating from '../components/Chating';
 import UserFind from '../components/UserFind';
-
 import { AnimatePresence } from 'framer-motion';
 
 const MainBox = styled.div`
@@ -22,13 +21,17 @@ const MainBox = styled.div`
 `
 const insertedToken = localStorage.getItem('token');
 
+
 const SideArea = () =>{
   console.log(insertedToken);
+  
   return(
     <MainBox>
       <Logo/>
+      
       <AnimatePresence>
-        <BrowserRouter>
+        <Chating/>
+        {/* <BrowserRouter>
           <Routes>
             {insertedToken ? 
               <Route path ="/" element={<Chating/>}></Route>
@@ -37,7 +40,7 @@ const SideArea = () =>{
             <Route path="/register" element={<Register/>}></Route>
             <Route path="/userFind" element={<UserFind/>}></Route>
           </Routes>
-        </BrowserRouter>
+        </BrowserRouter> */}
       </AnimatePresence>
     </MainBox>
     

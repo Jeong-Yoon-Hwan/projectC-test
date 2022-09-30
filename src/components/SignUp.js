@@ -36,7 +36,7 @@ const SinUpBox = styled.div`
 
 
 
-const Register = () =>{
+const SignUp = () =>{
 
   const [inputValue,setInputValue] = useState({
     userId:'',
@@ -73,7 +73,7 @@ const Register = () =>{
     <motion.div
       className="registerPage"
       initial={{opacity:0}}
-      animate={{opacity:1}}
+      animate={{opacity:1,transition:"2s"}}
       exit={{opacity:0}}
     >
       <SinUpBox>
@@ -103,4 +103,4 @@ const Register = () =>{
   )
 }
 
-export default Register;
+export default SignUp;
