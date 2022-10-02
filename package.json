@@ -32,21 +32,23 @@
     "http": "^0.0.1-security",
     "json-server-auth": "^2.1.0",
     "lightweight-charts": "^3.8.0",
+    "nodemon": "^2.0.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.0",
-    "socket.io": "^4.5.2",
-    "socket.io-client": "^4.5.2",
     "style-loader": "^3.3.1",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.11.0"
+    "webpack-dev-server": "^4.11.0",
+    "ws": "^8.9.0"
   },
   "devDependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@types/socket.io": "^3.0.2",
     "axios": "^0.27.2",
     "clean-webpack-plugin": "^4.0.0",
     "html-webpack-plugin": "^5.5.0",
+    "react-refresh": "^0.14.0",
     "styled-components": "^5.3.5"
   }
 }

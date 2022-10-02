@@ -1,6 +1,13 @@
 import React,{useRef,useState} from "react"
 import styled from "styled-components"
 import axios from "axios"
+const ws = new WebSocket("ws://localhost:3001");
+
+function sendMessage(){
+
+}
+
+
 
 const ChatingBox = styled.div`
   width:inherit ;
@@ -11,6 +18,7 @@ const ChatingBox = styled.div`
     height:calc(100% - 50px);
     background-color:#f1f1f1;
     display:flex;
+    flex-direction:column;
     justify-content:end;
     overflow:hidden;
   }
@@ -46,6 +54,26 @@ const ChatingBox = styled.div`
 
 
 const Chating = () => {
+
+
+  //서버에서 보낸 메세지 받기
+  function receiveMessage(event){
+    //채팅이 입력될 박스를 생성
+    const chat = document.createElement("div")
+    //메세지가 입력될요소를 생성
+    const message = document.createTextNode(event.data)
+    //메세지를 채팅박스에 추가
+    chat.appendChild(message)
+    //채팅박스-->메인박스 초기화
+    const chatBox = document.querySelector("main");
+    //채팅박스에 chat 추가함
+    chatBox.appendChild(chat)
+  }ws.onmessage = receiveMessage //서버에 데이터가 전송되었을때 함수 실행
+
+
+
+
+
   const inputRef = useRef();
   const clearInput = () =>{
     inputRef.current.value="";
@@ -117,7 +145,8 @@ const Chating = () => {
           onKeyUp={onEnter}
           ref={inputRef}
         />
-        <button onClick={onSubmit}>보내기</button>
+        {/* <button onClick={onSubmit}>보내기</button> */}
+        <button></button>
         
       </section>
     </ChatingBox>

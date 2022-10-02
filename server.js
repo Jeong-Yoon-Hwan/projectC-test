@@ -1,24 +1,24 @@
-const express = require("express");
-const app = express();
-const http = require("http");
-const { Server } = require("socket.io");
-const cors = require("cors");
+const express = require("express")
+const { WebSocketServer } = require("ws")
+const app = express()
 
-app.use(cors());
-const server = http.createServer(app);
-const io = new Server(server,{
-  cors : {
-    origin : "http://localhost:3000",
-    methods : ["GET","POST"],
-  },
+//dist 폴더에 있는 파일을 사용
+app.use(express.static("dist"))
+
+//3000번으로 포트 생성
+app.listen(3000, () => {
+  console.log(`Example app listening on port 3000`)
 })
-io.on("connetion",(socket)=>{
-  console.log(`User Connected: ${socket.id}`)
-  socket.on("send_message",(data)=>{
-    console.log(data);
+
+//포트 3001로 웹소켓 서버 생성
+const wss = new WebSocketServer({ port: 3001 })
+
+
+//웹소켓 연결
+wss.on("connection", (ws, request) => {
+  //반복문을 사용하여 모든 클라이언트에게 메세지 전송
+  wss.clients.forEach(client =>{
+    client.send(`새로운 유저가 접속했습니다. 현재유저: ${wss.clients.size}명`)
   })
-})
-
-server.listen(3001,()=>{
-  console.log("server run... 3001");
+  console.log(`새로운 유저 접속: ${request.socket.remoteAddress}`)
 })
