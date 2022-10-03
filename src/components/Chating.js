@@ -4,8 +4,6 @@ import axios from "axios"
 const ws = new WebSocket("ws://localhost:3001");
 
 
-
-
 const ChatingBox = styled.div`
   width:inherit ;
   height:90vh;
@@ -98,7 +96,7 @@ const Chating = () => {
     //채팅박스-->메인박스 초기화
     const chatBox = document.querySelector("main");
     //채팅박스에 chat 추가함
-     Box.current.appendChild(chat)
+    Box.current.appendChild(chat)
     //chatBox.appendChild(chat);
   }ws.onmessage = receiveMessage //서버에 데이터가 전송되었을때 함수 실행
 
@@ -125,15 +123,7 @@ const Chating = () => {
     if(inputValue.chat === ""){
       alert("채팅 안치셨어요");
     }else{
-    //newBox : 채팅메세지 박스
-    // let newBox = document.createElement('div');
-    // newBox.textContent=`${inputValue.chat}`; //new Box에 채팅 인풋에 입력한 값으로 추가
     
-    // //채팅메세지 박스가 입력되는 박스//
-    // Box.current.appendChild(newBox);
-    // Box.current.style.display="flex";
-    // Box.current.style.flexDirection="column";
-    // Box.current.style.alignItems="end";
     }
     
     clearInput();
@@ -167,10 +157,7 @@ const Chating = () => {
     </ChatingBox>
     
   )
-
 }
-
-
 
 //페이지가 로드 되었을때 인증값 전송
 window.onload = ()=>{
@@ -180,6 +167,9 @@ window.onload = ()=>{
     data: {
       nickname: localStorage.getItem("nickname"),
       token: localStorage.getItem("token")
+    },
+    Headers:{
+      Authorization: `Bearer ${localStorage.getItem("token")}`
     }
   }).then(function (response) { 
     console.log(response)
@@ -188,8 +178,6 @@ window.onload = ()=>{
     console.log(error);
   });
 }
-
-
 
 
 export default Chating;
