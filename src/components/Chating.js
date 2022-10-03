@@ -4,10 +4,15 @@ import axios from "axios"
 const ws = new WebSocket("ws://localhost:3001");
 
 
-const ChatingBox = styled.div`
+let state = "";
+console.log(state);
+
+
+const MainBox = styled.div`
   width:inherit ;
   height:90vh;
   
+  //메인채팅창//
   & > main {
     width: inherit;
     height:calc(100% - 50px);
@@ -17,29 +22,34 @@ const ChatingBox = styled.div`
     justify-content:end;
     overflow:hidden;
 
-    & > div {
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:end; 
-    }
-
-      & > div > div {
-        width:max-content;
-        height:max-content;
-        max-width:200px;
-        background-color:#F2DA46;
-        font-weight:bold;
-        font-size:14px;
+      //전체 채팅박스
+      & > div {
         display:flex;
-        align-items:center;
-        justify-content:end;
-        word-break:break-all;
-        border-radius:20px 20px 0px 20px;
-        padding:10px;
-        margin:10px;
+        flex-direction:column;
+        justify-content:center;
+        align-items:end; 
       }
+
+      //개별 채팅박스
+        & > div > div {
+          /* width:max-content;
+          height:max-content;
+          max-width:200px;
+          //background-color:#F2DA46;
+          background-color: ${state ? "yellow" : "black"};
+          font-weight:bold;
+          font-size:14px;
+          display:flex;
+          align-items:center;
+          justify-content:end;
+          word-break:break-all;
+          border-radius:20px 20px 0px 20px;
+          padding:10px;
+          margin:10px; */
+        }
   }
+
+//채팅 입력칸
   & > section{
     width:inherit;
     height:50px;
@@ -71,18 +81,13 @@ const ChatingBox = styled.div`
 
 const Chating = () => {
 
-  function sendMessage(){
-    const message = document.getElementById("chat");
-    ws.send(message);
-  }
-
-
   const inputRef = useRef();
   const clearInput = () =>{
     inputRef.current.value="";
   }
 
   const Box = useRef("");
+  const Box2 = useRef("");
 
   
   //서버에서 보낸 메세지 받기
@@ -90,9 +95,36 @@ const Chating = () => {
     //채팅이 입력될 박스를 생성
     const chat = document.createElement("div")
     //메세지가 입력될요소를 생성
-    const message = document.createTextNode(event.data)
+    const msg = JSON.parse(event.data); //msg에 data를 JSON객체로 받아옴.
+    const message = document.createTextNode(msg.text)
+    
+    chat.style.width="max-content";
+    chat.style.maxWidth="200px";
+    chat.style.height="max-content";
+
+    if(msg.user===localStorage.getItem("nickname")){
+    chat.style.backgroundColor="#F2DA46";
+    }else{
+      chat.style.backgroundColor="#4BDB87";
+    }
+    chat.style.display="flex";
+    chat.style.flexDirection="column";
+    if(msg.user===localStorage.getItem("nickname")){
+
+    }else{
+      chat.style.alignSelf="start";
+    }
+    chat.style.justifyContent="end";
+    chat.style.alignItems="center";
+    chat.style.fontWeight="bold";
+    chat.style.fontSize="14px";
+    chat.style.wordBreak="break-all";
+    chat.style.borderRadius="20px 20px 0px";
+    chat.style.padding="10px";
+    chat.style.margin="10px";
+   
     //메세지를 채팅박스에 추가
-    chat.appendChild(message)
+    chat.appendChild(message);
     //채팅박스-->메인박스 초기화
     const chatBox = document.querySelector("main");
     //채팅박스에 chat 추가함
@@ -118,7 +150,14 @@ const Chating = () => {
   const onSubmit = () =>{  
     //인풋에 입력한 값을 message로 전송
     const message = inputValue.chat;
-    ws.send(message);
+    state = true;
+    console.log(state);
+    const msg = {
+      type:"message",
+      text:message,
+      user: localStorage.getItem("nickname")
+    }
+    ws.send(JSON.stringify(msg));
 
     if(inputValue.chat === ""){
       alert("채팅 안치셨어요");
@@ -137,7 +176,8 @@ const Chating = () => {
   }
 
   return(
-    <ChatingBox>
+    
+    <MainBox>
       <main id="chatBox">
         <div ref={Box}></div>
       </main>
@@ -154,7 +194,7 @@ const Chating = () => {
         {/* <button></button> */}
         
       </section>
-    </ChatingBox>
+    </MainBox>
     
   )
 }

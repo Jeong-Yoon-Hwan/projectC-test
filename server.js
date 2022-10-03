@@ -18,7 +18,12 @@ const wss = new WebSocketServer({ port: 3001 })
 wss.on("connection", (ws, request) => {
   //반복문을 사용하여 모든 클라이언트에게 메세지 전송
   wss.clients.forEach(client =>{
-    client.send(`새로운 유저가 접속했습니다. 현재유저: ${wss.clients.size}명`)
+    const msg = {
+      type: "message",
+      text:`새로운 유저가 접속했습니다. 현재유저:${wss.clients.size}명`,
+    }
+    client.send(JSON.stringify(msg))
+    //client.send(`새로운 유저가 접속했습니다. 현재유저: ${wss.clients.size}명`)
   })
   console.log(`새로운 유저 접속: ${request.socket.remoteAddress}`)
 
