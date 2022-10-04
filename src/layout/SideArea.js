@@ -22,10 +22,8 @@ const SideArea = () =>{
   return(
     <MainBox>
       <Logo/>
-      
       <AnimatePresence>
         <Chating/>
-        
       </AnimatePresence>
     </MainBox>
     

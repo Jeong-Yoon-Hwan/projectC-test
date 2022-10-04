@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { BrowserRouter, Link } from "react-router-dom";
 import { motion } from "framer-motion"
+import useInput from "../hooks/useInput";
 
 
 const LoginBox = styled.div`
@@ -40,32 +41,24 @@ const Button = styled.button`
 //로그인 폼 작성
 const LoginForm = () => {
 
-  const [formData,setFormData] = useState({
-    nickname:'',
-    password:''
-  })
-
-  function handleChange(event){
-    setFormData({
-      ...formData,
-      [event.target.name] : event.target.value
-    })
-  }
-
+  const nickname = useInput();
+  const password = useInput();
+  console.log(nickname);
+  console.log(password);
 
   //아이디 비밀번호 값 보내기
   function handleSubmit(event){
     event.preventDefault();
 
-    if(formData.nickname===""||formData.password===""){
+    if(nickname===""|| password ===""){
       alert("아이디와 비밀번호가 입력되지 않았습니다");
     }
     axios({
       url: 'http://localhost:5858/auth/login',
       method: 'POST',
       data: {
-        nickname: formData.nickname,
-        password:formData.password	
+        nickname: nickname.value,
+        password: password.value	
       }
        
     }).then(function (response) { 
@@ -79,8 +72,6 @@ const LoginForm = () => {
     .catch(function (error) {
       console.log(error);
     });
-
-    
 
   }
 
@@ -97,15 +88,15 @@ const LoginForm = () => {
             type="text" 
             name="nickname" 
             placeholder="아이디를 입력하세요" 
-            value={formData.nickname}
-            onChange={event=>handleChange(event)}
+            value={nickname.value}
+            onChange={nickname.onChange}  //nickname 변수에 저장된 값 사용
           />
           <input 
             type="password" 
             name="password" 
             placeholder="비밀번호를 입력하세요" 
-            value ={formData.password}
-            onChange={event=>handleChange(event)}
+            value={password.value}
+            onChange={password.onChange}
           />
           <Button className= 'login-btn' type="submit">로그인</Button>
           </form>

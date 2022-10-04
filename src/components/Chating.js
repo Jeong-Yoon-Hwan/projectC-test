@@ -1,19 +1,26 @@
 import React,{useRef,useState} from "react"
 import styled from "styled-components"
 import axios from "axios"
+import useInput from "../hooks/useInput";
+import { createChart } from "lightweight-charts";
+import messageStyle from "../common/chatMessageStyle";
+import alarmStyle from "../common/alarmMessageStyle";
+
+
 const ws = new WebSocket("ws://localhost:3001");
 
-
-let state = "";
-console.log(state);
-
-
+const Alarm = styled.div`
+  width:100%;
+  height:25px;
+  background-color: gray;
+`
 const MainBox = styled.div`
   width:inherit ;
   height:90vh;
   
   //메인채팅창//
   & > main {
+    position:relative;
     width: inherit;
     height:calc(100% - 50px);
     background-color:#f1f1f1;
@@ -29,24 +36,6 @@ const MainBox = styled.div`
         justify-content:center;
         align-items:end; 
       }
-
-      //개별 채팅박스
-        & > div > div {
-          /* width:max-content;
-          height:max-content;
-          max-width:200px;
-          //background-color:#F2DA46;
-          background-color: ${state ? "yellow" : "black"};
-          font-weight:bold;
-          font-size:14px;
-          display:flex;
-          align-items:center;
-          justify-content:end;
-          word-break:break-all;
-          border-radius:20px 20px 0px 20px;
-          padding:10px;
-          margin:10px; */
-        }
   }
 
 //채팅 입력칸
@@ -80,89 +69,60 @@ const MainBox = styled.div`
 `
 
 const Chating = () => {
-
   const inputRef = useRef();
   const clearInput = () =>{
     inputRef.current.value="";
   }
 
-  const Box = useRef("");
-  const Box2 = useRef("");
-
+  const MessageBox = useRef("");  //! 메세지가 표시되는 박스
+  const AlarmBox = useRef("");    //! 알림이 표시되는 박스
   
-  //서버에서 보낸 메세지 받기
+  //* 서버에서 보낸 메세지 받기
   function receiveMessage(event){
-    //채팅이 입력될 박스를 생성
+    // 채팅이 입력될 박스를 생성
     const chat = document.createElement("div")
     //메세지가 입력될요소를 생성
     const msg = JSON.parse(event.data); //msg에 data를 JSON객체로 받아옴.
     const message = document.createTextNode(msg.text)
-    
-    chat.style.width="max-content";
-    chat.style.maxWidth="200px";
-    chat.style.height="max-content";
 
-    if(msg.user===localStorage.getItem("nickname")){
-      chat.style.backgroundColor="#F2DA46";
-      chat.style.borderRadius="20px 20px 0px";
-    }else{
-      chat.style.backgroundColor="#4BDB87";
-      chat.style.alignSelf="start";
-      chat.style.borderRadius="20px 20px 20px 0px";
+    //* 메세지 타입이 "message" 일때
+    if(msg.type==="message"){
+      //* 채팅박스 스타일 지정 >> 일단 함수로 만들어놨음..
+      messageStyle(chat,msg.nickname,localStorage.getItem("nickname"));
+    }else {
+      alarmStyle(chat);
     }
-    chat.style.display="flex";
-    chat.style.flexDirection="column";
-    chat.style.justifyContent="end";
-    chat.style.alignItems="center";
-    chat.style.fontWeight="bold";
-    chat.style.fontSize="14px";
-    chat.style.wordBreak="break-all";
     
-    chat.style.padding="10px";
-    chat.style.margin="10px";
-  
     //메세지를 채팅박스에 추가
     chat.appendChild(message);
-    //채팅박스-->메인박스 초기화
-    const chatBox = document.querySelector("main");
+
     //채팅박스에 chat 추가함
-    Box.current.appendChild(chat)
-    //chatBox.appendChild(chat);
-  }ws.onmessage = receiveMessage //서버에 데이터가 전송되었을때 함수 실행
-
-
-  //채팅 입력값 useState로 상태 관리
-  const [inputValue,setInputValue] = useState({
-    chat : ''
-  })
-  const inputChange = (e) =>{
-    const {name, value} = e.target
-    setInputValue({
-      ...inputValue,
-      [name]:value,
-    })
+    MessageBox.current.appendChild(chat)
+    
   }
-
+  ws.onmessage = receiveMessage //서버에 데이터가 전송되었을때 함수 실행
+  
+  const chat = useInput();
 
   //보내기 버튼 눌렀을때 채팅내용 담은 박스 생성
   const onSubmit = () =>{  
     //인풋에 입력한 값을 message로 전송
-    const message = inputValue.chat;
-    state = true;
-    console.log(state);
+    const message = chat.value;
+
     const msg = {
       type:"message",
       text:message,
-      user: localStorage.getItem("nickname")
+      nickname: localStorage.getItem("nickname")
     }
     ws.send(JSON.stringify(msg));
 
-    if(inputValue.chat === ""){
+    const inputValue = document.getElementById("chat");
+    
+    if(inputValue.value===""){
       alert("채팅 안치셨어요");
+      clearInput();
     }else{
-    
     }
-    
     clearInput();
   }
 //엔터키를 눌렀을때 submit 입력
@@ -177,14 +137,16 @@ const Chating = () => {
     
     <MainBox>
       <main id="chatBox">
-        <div ref={Box}></div>
+        <div ref={AlarmBox}></div>
+        <div ref={MessageBox}></div>
       </main>
       <section>
         <input 
           id="chat"
           type="text"
           name="chat"
-          onChange={inputChange}
+          value={chat.value}
+          onChange={chat.onChange}
           onKeyUp={onEnter}
           ref={inputRef}
         />
