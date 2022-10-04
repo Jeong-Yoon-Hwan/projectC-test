@@ -52,7 +52,7 @@ const Button = styled.div`
   :hover{
     display:flex;
     flex-direction:column;
-    justify-conetnet:end;
+    justify-content:end;
     align-items:end;
       ul{
         display:flex;

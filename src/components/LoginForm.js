@@ -67,6 +67,7 @@ const LoginForm = () => {
         nickname: formData.nickname,
         password:formData.password	
       }
+       
     }).then(function (response) { 
       console.log(response.data.token)
 

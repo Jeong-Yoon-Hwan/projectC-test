@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logo from '../components/logo';
-import { BrowserRouter,Routes,Route, useLocation } from 'react-router-dom';
 import Chating from '../components/Chating';
 import { AnimatePresence } from 'framer-motion';
 
@@ -11,9 +10,8 @@ const MainBox = styled.div`
   background:#333;
   display:flex;
   flex-direction:column;
-  justify-conetnet:center;
+  justify-content:center;
   align-items:center;
-  
 `
 const insertedToken = localStorage.getItem('token');
 

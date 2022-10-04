@@ -103,26 +103,24 @@ const Chating = () => {
     chat.style.height="max-content";
 
     if(msg.user===localStorage.getItem("nickname")){
-    chat.style.backgroundColor="#F2DA46";
+      chat.style.backgroundColor="#F2DA46";
+      chat.style.borderRadius="20px 20px 0px";
     }else{
       chat.style.backgroundColor="#4BDB87";
+      chat.style.alignSelf="start";
+      chat.style.borderRadius="20px 20px 20px 0px";
     }
     chat.style.display="flex";
     chat.style.flexDirection="column";
-    if(msg.user===localStorage.getItem("nickname")){
-
-    }else{
-      chat.style.alignSelf="start";
-    }
     chat.style.justifyContent="end";
     chat.style.alignItems="center";
     chat.style.fontWeight="bold";
     chat.style.fontSize="14px";
     chat.style.wordBreak="break-all";
-    chat.style.borderRadius="20px 20px 0px";
+    
     chat.style.padding="10px";
     chat.style.margin="10px";
-   
+  
     //메세지를 채팅박스에 추가
     chat.appendChild(message);
     //채팅박스-->메인박스 초기화
@@ -199,25 +197,7 @@ const Chating = () => {
   )
 }
 
-//페이지가 로드 되었을때 인증값 전송
-window.onload = ()=>{
-  axios({
-    url: 'http://localhost:5858/auth/inspect',
-    method: 'POST',
-    data: {
-      nickname: localStorage.getItem("nickname"),
-      token: localStorage.getItem("token")
-    },
-    Headers:{
-      Authorization: `Bearer ${localStorage.getItem("token")}`
-    }
-  }).then(function (response) { 
-    console.log(response)
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
+
 
 
 export default Chating;

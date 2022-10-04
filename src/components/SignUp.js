@@ -39,7 +39,7 @@ const SinUpBox = styled.div`
 const SignUp = () =>{
 
   const [inputValue,setInputValue] = useState({
-    nickName:'',
+    nickname:'',
     name:'',
     password:'',
     email:'',
@@ -49,22 +49,25 @@ const SignUp = () =>{
     setInputValue({
       ...inputValue,
       [e.target.name] : e.target.value
+      
     })
+    console.log(e.target.name);
   }
 
-  const doSignUp = async () =>{
-    axios({
-      url: "http://localhost:3001/users",
-      method : "POST",
-      data: {
-        nickName : inputValue.nickName,
+  const doSignUp =  (event) =>{
+    event.preventDefault();
+    
+    axios.post("http://localhost:5858/auth/signUp",
+      {
+        nickname : inputValue.nickname,
         password : inputValue.password,
         email : inputValue.email,
         name : inputValue.name
       }
-    }).then(function(response){
-      console.log(response)
-    }).catch(function(error){
+    ).then((response)=>{
+      console.log(response);
+      location.href="http://localhost:8000/";
+    }).catch((error)=>{
       console.log(error);
     })
   }
@@ -83,10 +86,10 @@ const SignUp = () =>{
                 placeholder="이름"
                 onChange={inputChangeHandler}/>
           <input type="text" 
-                name="nickName"
+                name="nickname"
                 placeholder="아이디"
                 onChange={inputChangeHandler}/>
-          <input type="text" 
+          <input type="password" 
                 name="password"
                 placeholder="비밀번호"
                 onChange={inputChangeHandler}/>
