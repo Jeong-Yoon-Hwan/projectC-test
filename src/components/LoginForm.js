@@ -1,5 +1,4 @@
 //로그인폼
-
 import axios from "axios";
 import React from "react";
 import styled from "styled-components";
@@ -7,36 +6,6 @@ import { useState } from "react";
 import { BrowserRouter, Link } from "react-router-dom";
 import { motion } from "framer-motion"
 import useInput from "../hooks/useInput";
-
-
-const LoginBox = styled.div`
-  width:230px;
-  height:max-content;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:22px;
-
-  input{
-    width:228px;
-    height:44px;
-    margin-bottom:22px;
-    padding:10px;
-    border:0;
-    border-radius:2px;
-  }
-`;
-
-const Button = styled.button`
-  width:228px;
-  height:44px;
-  background:${props => props.color || "#464BF2"};
-  color:white;
-  border:0;
-  border-radius:2px;
-  font-weight:bold;
-`
 
 //로그인 폼 작성
 const LoginForm = () => {
@@ -67,6 +36,8 @@ const LoginForm = () => {
       //* 로그인 성공하면 token,nickname 받아와서 로컬스토리지에 저장함//
       localStorage.setItem("token",response.data.token);
       localStorage.setItem("nickname",response.data.nickname);
+      localStorage.setItem("password",response.data.password);
+      localStorage.setItem("email",response.data.email);
       location.reload();
     })
     .catch(function (error) {
@@ -113,3 +84,33 @@ const LoginForm = () => {
 
 
 export default LoginForm;
+
+
+const LoginBox = styled.div`
+  width:230px;
+  height:max-content;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:22px;
+
+  input{
+    width:228px;
+    height:44px;
+    margin-bottom:22px;
+    padding:10px;
+    border:0;
+    border-radius:2px;
+  }
+`;
+
+const Button = styled.button`
+  width:228px;
+  height:44px;
+  background:${props => props.color || "#464BF2"};
+  color:white;
+  border:0;
+  border-radius:2px;
+  font-weight:bold;
+`

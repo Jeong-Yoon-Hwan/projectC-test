@@ -3,6 +3,42 @@
 import React,{useEffect, useState} from "react";
 import styled from "styled-components";
 import "../../src/index.css"
+import ModalBasic from "./ModalBasic";
+
+
+const nickname = localStorage.getItem("nickname");
+
+
+
+const Logo = () =>{
+  
+  const [modalOpen,setModalOpen] = useState(true); //useState로 모달창 flase
+  const showModal = () =>{
+    setModalOpen(true);
+  }
+
+  const logOut = () =>{
+    localStorage.clear();
+    location.reload();
+  }
+  return(
+      <LogoBox>
+        <h1 className="logo-font">Happy Bot & Chat</h1>
+        <Button color="none">{nickname}
+          <ul>
+            <li onClick={showModal}>회원정보 수정</li>
+            
+            <li onClick={logOut}>로그아웃</li>
+          </ul>
+        </Button>
+        { modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+      </LogoBox> 
+  )
+}
+  
+
+export default Logo;
+
 
 
 const LogoBox = styled.div`
@@ -60,28 +96,3 @@ const Button = styled.div`
       }
   }
 `
-const nickname = localStorage.getItem("nickname");
-
-
-
-
-const Logo = () =>{
-
-  const logOut = () =>{
-    localStorage.clear();
-    location.reload();
-  }
-  return(
-      <LogoBox>
-        <h1 className="logo-font">Happy Bot & Chat</h1>
-        <Button color="none">{nickname}
-          <ul>
-            <li>회원정보 수정</li>
-            <li onClick={logOut}>로그아웃</li>
-          </ul>
-        </Button>
-      </LogoBox> 
-  )
-}
-  
-export default Logo;
