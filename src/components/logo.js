@@ -9,7 +9,6 @@ const nickname = localStorage.getItem("nickname");
 
 
 const Logo = () =>{
-  
   const [modalOpen,setModalOpen] = useState(false); //useState로 모달창 flase
   const showModal = () =>{
     setModalOpen(true);
@@ -19,26 +18,24 @@ const Logo = () =>{
     localStorage.clear();
     location.reload();
   }
-  return(
+  return( 
       <LogoBox>
         <h1 className="logo-font">Happy Bot & Chat</h1>
-        <Button color="none">{nickname}
+        {localStorage.getItem("token") ? (
+          <Button color="none">{nickname}님
           <ul>
             <li onClick={showModal}>회원정보 수정</li>
-            
             <li onClick={logOut}>로그아웃</li>
           </ul>
         </Button>
+        ):null}
+        
         { modalOpen && <UserUpdate setModalOpen={setModalOpen} />}
       </LogoBox> 
   )
 }
-  
 
 export default Logo;
-
-
-
 const LogoBox = styled.div`
   width:100%;
   height:10vh;

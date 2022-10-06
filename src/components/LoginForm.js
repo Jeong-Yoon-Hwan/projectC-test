@@ -9,7 +9,6 @@ import useInput from "../hooks/useInput";
 
 //로그인 폼 작성
 const LoginForm = () => {
-
   const nickname = useInput();
   const password = useInput();
 
@@ -19,6 +18,7 @@ const LoginForm = () => {
 
     if(nickname.value===""|| password.value ===""){
       alert("아이디와 비밀번호가 입력되지 않았습니다");
+      return false;
     }
     axios({
       url: 'http://localhost:5858/auth/login',
@@ -53,7 +53,6 @@ const LoginForm = () => {
     exit={{opacity:0}}
     >
         <LoginBox>
-        <form action="#" className="login-form" onSubmit={event=>handleSubmit(event)}>
           <input 
             type="text" 
             name="nickname" 
@@ -68,11 +67,9 @@ const LoginForm = () => {
             value={password.value}
             onChange={password.onChange}
           />
-          <Button className= 'login-btn' type="submit">로그인</Button>
-          </form>
+          <Button onClick={handleSubmit}>로그인</Button>
           <Button type="button"><Link to="/userFind">아이디 / 비밀번호찾기</Link></Button>
           <Button type="button" color="none"><Link to="/signUp">회원가입</Link></Button>
-          
         </LoginBox>
       </motion.div>
     
@@ -95,7 +92,6 @@ const LoginBox = styled.div`
   input{
     width:228px;
     height:44px;
-    margin-bottom:22px;
     padding:10px;
     border:0;
     border-radius:2px;
