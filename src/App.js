@@ -21,9 +21,12 @@ const auth = () =>{
   ).then((response)=>{
     console.log(response);
   }).catch((error)=>{
-    console.log(error);
-    localStorage.clear();
-    location.reload();
+    swal("세션만료!","로그아웃되었습니다, 로그인창으로 이동합니다.","warning").then(()=>{
+      console.log(error);
+      localStorage.clear();
+      location.reload();
+    })
+    
   })
 }
 
