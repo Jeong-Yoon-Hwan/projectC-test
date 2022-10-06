@@ -2,10 +2,71 @@
 
 import React from "react"
 import styled from "styled-components"
-import {Link} from "react-router-dom";
-import {motion} from "framer-motion"
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion"
 import { useState } from "react";
 import axios from "axios";
+
+
+const UserFind = () =>{
+
+  //이름 이메일 상태값 관리
+  const [name,setName] = useState("");
+  const handleName = (e)=> setName(e.target.value);
+
+  const [email,setEmail] = useState("");
+  const handleEmail = (e) => setEmail(e.target.value);
+  console.log(name)
+
+  function handleSubmit(event){
+    event.preventDefault();
+
+    //이름과 이메일을 입력하여 회원정보 찾기
+    if(name === "" || email === ""){
+      alert("이름과 이메일이 입력되지 않았습니다")
+      return false;
+    }
+
+    axios.post("http://localhost:5858/auth/findPass",
+      {
+        name : name,
+        email : email,
+      }
+    ).then((response)=>{
+      console.log(response)
+      localStorage.setItem("nickname",response.data.nickname);
+      location.href="http://localhost:8000/findPass";
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
+
+  return(
+    <motion.div
+      className="registerPage"
+      initial={{opacity:0}}
+      animate={{opacity:1,transition:"2s"}}
+      exit={{opacity:0}}
+    >
+    <FindForm>
+      <input type="text" name="name" placeholder="이름"
+        value={name}
+        onChange={handleName}
+      />
+      <input type="text" name="email" placeholder="이메일"
+        value={email}
+        onChange={handleEmail}
+      />
+      <p>* 이름과 이메일을 입력하세요 *  </p><br></br>
+      <Button onClick={handleSubmit}>확인</Button>
+      <Button><Link to="/">로그인 화면으로 돌아가기</Link></Button>
+    </FindForm>
+    </motion.div>
+  )
+}
+
+export default UserFind;
+
 
 const FindForm = styled.div`
   width:230px;
@@ -15,6 +76,8 @@ const FindForm = styled.div`
       height:44px;
       margin-bottom:22px;
       padding:10px;
+      border:0;
+      border-radius: 2px;
     }
     & > p {
       color:white ;
@@ -34,70 +97,3 @@ const Button = styled.button`
   font-weight:bold;
   margin-bottom:22px;  
 `
-
-
-
-
-const UserFind = () =>{
-
-  const [formData,setFormData] = useState({
-    name:"",
-    email:"",
-  })
-
-  function handleChange(event){
-    setFormData({
-      ...formData,[event.target.name] : event.target.value
-    })
-    console.log(event.target.value);
-  } 
-
-
-  function handleSubmit(event){
-    event.preventDefault();
-    //이름과 이메일을 입력하여 회원정보 찾기
-    if(formData.name === "" || formData.email === ""){
-      alert("이름과 이메일이 입력되지 않았습니다")
-    }
-
-    axios({
-      url:"http://localhost:3001/users",
-      method:"GET",
-    })
-    .then((response)=>{
-      if(response.data.find((data)=>data.userName===formData.name&&data.email===formData.email)){
-        console.log("회원정보 일치");
-      }else{
-        console.log("회원정보 불일치")
-      }
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
-
-  }
-
-  return(
-    <motion.div
-      className="registerPage"
-      initial={{opacity:0}}
-      animate={{opacity:1,transition:"2s"}}
-      exit={{opacity:0}}
-    >
-    <FindForm>
-      <input type="text" name="name" placeholder="이름"
-        value={formData.name}
-        onChange={(event)=>handleChange(event)}
-      />
-      <input type="text" name="email" placeholder="이메일"
-        onChange={(event)=>handleChange(event)}
-      />
-      <p>* 이름과 이메일을 입력하세요 *  </p><br></br>
-      <Button onClick={handleSubmit}>아이디 / 비밀번호 찾기</Button>
-      <Button><Link to="/">로그인 화면으로 돌아가기</Link></Button>
-    </FindForm>
-    </motion.div>
-  )
-}
-
-export default UserFind;
