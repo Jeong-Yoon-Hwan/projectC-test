@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "../components/logo";
+import Logo from "../components/Logo";
 import LoginForm from "../components/LoginForm";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import SignUp from "../components/SignUp";
 import UserFind from "../components/UserFind";
+import FindPass from "../components/FindPass";
 
 const LoginBox = styled.div`
   width:100vw;
@@ -27,6 +28,7 @@ const LoginArea = () =>{
             <Route path="/" element={<LoginForm/>}></Route>
             <Route path="/signUp" element={<SignUp/>}></Route>
             <Route path="/userFind" element={<UserFind/>}></Route>
+            <Route path="/findPass" element={<FindPass/>}></Route>
           </Routes>
         </BrowserRouter>
         

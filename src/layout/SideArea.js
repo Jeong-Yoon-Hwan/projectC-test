@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../components/logo';
+import Logo from '../components/Logo';
 import Chating from '../components/Chating';
 import { AnimatePresence } from 'framer-motion';
 
