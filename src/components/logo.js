@@ -3,8 +3,7 @@
 import React,{useEffect, useState} from "react";
 import styled from "styled-components";
 import "../../src/index.css"
-import ModalBasic from "./ModalBasic";
-
+import UserUpdate from "./userUpdate";
 
 const nickname = localStorage.getItem("nickname");
 
@@ -30,7 +29,7 @@ const Logo = () =>{
             <li onClick={logOut}>로그아웃</li>
           </ul>
         </Button>
-        { modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+        { modalOpen && <UserUpdate setModalOpen={setModalOpen} />}
       </LogoBox> 
   )
 }
