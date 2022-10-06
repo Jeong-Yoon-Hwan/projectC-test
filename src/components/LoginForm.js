@@ -12,14 +12,12 @@ const LoginForm = () => {
 
   const nickname = useInput();
   const password = useInput();
-  console.log(nickname);
-  console.log(password);
 
   //아이디 비밀번호 값 보내기
   function handleSubmit(event){
     event.preventDefault();
 
-    if(nickname===""|| password ===""){
+    if(nickname.value===""|| password.value ===""){
       alert("아이디와 비밀번호가 입력되지 않았습니다");
     }
     axios({
@@ -29,7 +27,7 @@ const LoginForm = () => {
         nickname: nickname.value,
         password: password.value	
       }
-       
+
     }).then(function (response) { 
       console.log(response.data.token)
 
@@ -39,9 +37,10 @@ const LoginForm = () => {
       localStorage.setItem("password",response.data.password);
       localStorage.setItem("email",response.data.email);
       location.reload();
-    })
+    })  
     .catch(function (error) {
       console.log(error);
+      swal("로그인 실패","아이디 또는 비밀번호를 다시 입력해주세요","warning")
     });
 
   }
@@ -79,8 +78,6 @@ const LoginForm = () => {
     
   )
 }
-
-
 
 
 export default LoginForm;

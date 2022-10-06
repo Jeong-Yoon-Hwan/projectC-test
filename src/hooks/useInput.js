@@ -2,7 +2,7 @@ import {useState} from "react";
 
 function useInput(){
   const [value,setValue] = useState('');
-  const onChange = (e) => setValue(e.target.value);
+  const onChange = (event) => setValue(event.target.value); 
   
   return { value, onChange };
 }

@@ -9,10 +9,9 @@ import ModalBasic from "./ModalBasic";
 const nickname = localStorage.getItem("nickname");
 
 
-
 const Logo = () =>{
   
-  const [modalOpen,setModalOpen] = useState(true); //useState로 모달창 flase
+  const [modalOpen,setModalOpen] = useState(false); //useState로 모달창 flase
   const showModal = () =>{
     setModalOpen(true);
   }
