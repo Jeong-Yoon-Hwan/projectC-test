@@ -1,12 +1,19 @@
 const express = require("express")
-const { useReducer } = require("react")
 const { WebSocketServer } = require("ws")
 const app = express()
+const cors = require("cors");
 
 //3000번으로 포트 생성
 app.listen(3000, () => {
   console.log(`Example app listening on port 3000`)
 })
+
+app.use(cors()) 
+
+app.post("/test",(req,res)=>{
+  res.send("hello!!")
+})
+
 
 //포트 3001로 웹소켓 서버 생성
 const wss = new WebSocketServer({ port: 3001 })
