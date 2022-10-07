@@ -53,27 +53,26 @@ const LoginForm = () => {
     animate={{opacity:1,transition:"2s"}}
     exit={{opacity:0}}
     >
-        <LoginBox>
-          <input 
-            type="text" 
-            name="nickname" 
-            placeholder="아이디를 입력하세요" 
-            value={nickname.value}
-            onChange={nickname.onChange}  //nickname 변수에 저장된 값 사용
-          />
-          <input 
-            type="password" 
-            name="password" 
-            placeholder="비밀번호를 입력하세요" 
-            value={password.value}
-            onChange={password.onChange}
-          />
-          <Button onClick={handleSubmit}>로그인</Button>
-          <Button type="button"><Link to="/userFind">아이디 / 비밀번호찾기</Link></Button>
-          <Button type="button" color="none"><Link to="/signUp">회원가입</Link></Button>
-        </LoginBox>
-      </motion.div>
-    
+      <LoginBox>
+        <input 
+          type="text" 
+          name="nickname" 
+          placeholder="아이디를 입력하세요" 
+          value={nickname.value}
+          onChange={nickname.onChange}  //nickname 변수에 저장된 값 사용
+        />
+        <input 
+          type="password" 
+          name="password" 
+          placeholder="비밀번호를 입력하세요" 
+          value={password.value}
+          onChange={password.onChange}
+        />
+        <Button onClick={handleSubmit}>로그인</Button>
+        <Button type="button"><Link to="/userFind">아이디 / 비밀번호찾기</Link></Button>
+        <Button type="button" color="none"><Link to="/signUp">회원가입</Link></Button>
+      </LoginBox>
+    </motion.div>
   )
 }
 

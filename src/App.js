@@ -5,9 +5,6 @@ import "./index.css";
 import LoginArea from "./pages/LoginArea.js";
 import axios from "axios";
 
-const path_1 = "http://localhost:5858";
-const path_2 = "http://localhost:4000";
-
 const insertedToken = localStorage.getItem('token');
 
 // 토큰 유효성 검사 서버에 전송
@@ -33,23 +30,10 @@ const auth = () =>{
   })
 }
 
-// const test = () =>{
-//   axios.post("http://localhost:4000/test",
-//     {
-//       name:"hello"
-//     }
-//   ).then((response)=>{
-//     console.log(response)
-//   }).catch((error)=>{
-//     console.log(error);
-//   })
-// }
-
 //페이지가 로드 되었을때 인증값 전송
 if(insertedToken){
   window.onload = ()=>{ //새로고침 될때마다 실행
     auth();
-   // test();
   }
 
   let time = 1000 * 60 * 5 //5분마다 실행
