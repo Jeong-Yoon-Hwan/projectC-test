@@ -4,6 +4,7 @@ import React,{useEffect, useState} from "react";
 import styled from "styled-components";
 import "../../src/index.css"
 import UserUpdate from "./userUpdate";
+import UserDelete from "./userDelete";
 
 const nickname = localStorage.getItem("nickname");
 
@@ -13,12 +14,17 @@ const Logo = () =>{
   const showModal = () =>{
     setModalOpen(true);
   }
-
+ 
   const logOut = () =>{
     localStorage.clear();
     location.reload();
   }
-  return( 
+
+  const [userDeleteOpen,setUserDeleteOpen] = useState(false);
+  const userDelete = () =>{
+    setUserDeleteOpen(true);
+  }
+    return( 
       <LogoBox>
         <h1 className="logo-font">Happy Bot & Chat</h1>
         {localStorage.getItem("token") ? (
@@ -26,11 +32,13 @@ const Logo = () =>{
           <ul>
             <li onClick={showModal}>회원정보 수정</li>
             <li onClick={logOut}>로그아웃</li>
+            <li onClick={userDelete}>회원탈퇴</li>
           </ul>
         </Button>
         ):null}
         
         { modalOpen && <UserUpdate setModalOpen={setModalOpen} />}
+        { userDeleteOpen && <UserDelete setUserDeleteOpen={setUserDeleteOpen}/>}
       </LogoBox> 
   )
 }

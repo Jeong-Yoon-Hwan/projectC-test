@@ -1,6 +1,4 @@
 // 헤더
-
-
 import React from 'react';
 import styled from 'styled-components';
 import Navigation from './navigation';
