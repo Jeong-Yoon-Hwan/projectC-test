@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import {Link} from "react-router-dom"
 import styled from "styled-components";
 import axios from "axios";
 import useInput from "../hooks/useInput";
@@ -62,9 +63,6 @@ function UserUpdate({ setModalOpen }) {
     const checkEmail = () =>{
       emailDisable ? setEmailDisable(false) : setEmailDisable(true);
     }
-
-    
-
     return(
       
       <Container>
@@ -136,7 +134,7 @@ const Container = styled.div`
   border: 0;
   z-index: 999;
   position : absolute;
-  top:50%;
+  top:50%;  
   left:50%;
   transform: translate(-50%,-50%);
   background-color: rgba(51,51,51,0.85);
@@ -164,7 +162,7 @@ const Container = styled.div`
     width:100%;
     height:50px;
     gap:10px;
-    padding:10px;
+    padding:15px;
 
     & > button {
       width:100%;

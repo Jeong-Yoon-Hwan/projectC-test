@@ -31,8 +31,9 @@ const Logo = () =>{
           <Button color="none">{nickname}님
           <ul>
             <li onClick={showModal}>회원정보 수정</li>
-            <li onClick={logOut}>로그아웃</li>
             <li onClick={userDelete}>회원탈퇴</li>
+            <li onClick={logOut}>로그아웃</li>
+            
           </ul>
         </Button>
         ):null}
