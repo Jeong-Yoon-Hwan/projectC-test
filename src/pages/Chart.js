@@ -1,15 +1,20 @@
 import axios from "axios";
 import React,{useEffect, useState} from "react";
 import styled from "styled-components";
+import "../index.css";
 
 const Chart = () => {
     const refreshPage = () =>{
       window.location.reload();
     }
 
-    const [loading,setLoading] = useState(true);
+    const [chart,setChart] = useState(false);
+    const chartHandle = () =>{
+      setChart(true);
+    }
 
-    const [coins,setCoins] = useState([]);
+    const [loading,setLoading] = useState(true); //로딩 상태
+    const [coins,setCoins] = useState([]); //코인 데이터 상태
 
     useEffect(()=>{
       axios.get("http://api.coinpaprika.com/v1/tickers?quotes=KRW")
@@ -26,11 +31,13 @@ const Chart = () => {
       <Container>
         <header>
           <h1>실시간 가상화폐 순위</h1>
-          <button onClick={ refreshPage }>새로고침</button>
+          <button onClick={ refreshPage }><span className="material-symbols-outlined">refresh</span></button>
+          <div><input onClick={chartHandle} type="checkbox"/><label>그래프 보기</label></div>
         </header>
         <section>
+        
           {
-            loading ? <span>Loading...</span> :
+            loading ? <div className="loaingArea"><div className="img"></div></div> :
             (
             <div className="table-wrapper">
               <div className="column-title">
@@ -38,7 +45,7 @@ const Chart = () => {
                 <div style={{width:"20%",textAlign:"center"}}>종목</div>
                 <div style={{width:"10%",textAlign:"center"}}>기호</div>
                 <div style={{width:"10%",textAlign:"center"}}>가격(KRW)</div>
-                <div style={{width:"10%",textAlign:"center"}}>총 시가</div>
+                <div style={{width:"10%",textAlign:"center"}}>총  시가</div>
                 <div style={{width:"10%",textAlign:"center"}}>거래량(24H)</div>
                 <div style={{width:"10%",textAlign:"center"}}>변동(24H)</div>
                 <div style={{width:"10%",textAlign:"center"}}>변동(7D)</div>
@@ -46,18 +53,16 @@ const Chart = () => {
 
               {
                 coins.map((coin,idx)=>(
-                  
-                  <div className="column-item">
+                  <div key={idx} className="column-item">
                     <div style={{width:"4%"}}>{coin.rank}</div>
                     <div style={{width:"20%",textAlign:"center"}}>{coin.name}</div>
                     <div style={{width:"10%",textAlign:"center"}}>{coin.symbol}</div>
                     <div style={{width:"10%",textAlign:"center"}}>{(coin.quotes.KRW.price.toFixed(1)).toLocaleString()}</div>
-                    <div style={{width:"10%",textAlign:"center"}}>{(coin.quotes.KRW.market_cap / 1000000000000).toFixed(2)}</div>
-                    <div style={{width:"10%",textAlign:"center"}}>{ (coin.quotes.KRW.volume_24h / 1000000000000).toFixed(2) }</div>
+                    <div style={{width:"10%",textAlign:"center"}}>{(coin.quotes.KRW.market_cap / 1000000000000).toFixed(3)}(T)</div>
+                    <div style={{width:"10%",textAlign:"center"}}>{ (coin.quotes.KRW.volume_24h / 1000000000000).toFixed(3) }(T)</div>
                     <div style={{width:"10%",textAlign:"center"}}>{ coin.quotes.KRW.percent_change_24h.toFixed(2) }%</div>
                     <div style={{width:"10%",textAlign:"center"}}>{ coin.quotes.KRW.percent_change_7d.toFixed(2) }%</div>
                   </div>
-
                 ))
               }
             </div>
@@ -65,6 +70,7 @@ const Chart = () => {
             )
           }
         </section>
+        
       </Container>
     )
   }
@@ -72,7 +78,8 @@ const Chart = () => {
 export default Chart;
 
 
-const Container = styled.div`
+const Container = styled.div` 
+
   width:100%;
   height:100%;
   background-color: white;
@@ -82,11 +89,16 @@ const Container = styled.div`
  
   & > header {
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin:10px;
+    gap:10px;
   }
   
   & > section {
-    
+    width:100%;
+    height:100%;
+    position:relative;
     .table-wrapper{
       display: grid;
       grid-template-columns: 8 1fr;
@@ -119,5 +131,39 @@ const Container = styled.div`
     .column-item:nth-child(odd){
       background-color: #e0e0e0;
     }
+
+
+    
   }
+  .img {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    border: 6px solid transparent;
+    border-radius: 50%;
+    background-image: linear-gradient(#fff, #fff), 
+    linear-gradient(to right, white 0%,  black 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    animation: rotate_image 2s linear infinite;transform-origin: 50% 50%;
+  }
+
+  @keyframes rotate_image{
+      100% {
+          transform: rotate(360deg);
+      }
+  }
+
+
+  .loaingArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:100%;
+    
+  }
+
+  
 `

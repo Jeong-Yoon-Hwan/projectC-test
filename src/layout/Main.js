@@ -2,7 +2,7 @@ import React from 'react';
 import {Link,Route,Routes,BrowserRouter} from "react-router-dom";
 import Header from '../components/Header.js';
 import styled from 'styled-components';
-import Chart from '../pages/Chart.js';
+import Chart from '../pages/Chart';
 import News from '../pages/News.js';
 import Trading from '../pages/Trading.js';
 import Info from '../pages/Info.js';
