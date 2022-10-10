@@ -2,15 +2,21 @@ import axios from "axios";
 import React,{useEffect, useState} from "react";
 import styled from "styled-components";
 import "../index.css";
+import Graph from "../components/graph";
 
 const Chart = () => {
     const refreshPage = () =>{
       window.location.reload();
     }
 
-    const [chart,setChart] = useState(false);
+    //char의 상태값 체크박스로 변경
+    const [chart,setChart] = useState(true);
     const chartHandle = () =>{
-      setChart(true);
+      if(chart === false){
+        setChart(true);
+      }else{
+        setChart(false);
+      }
     }
 
     const [loading,setLoading] = useState(true); //로딩 상태
@@ -32,9 +38,13 @@ const Chart = () => {
         <header>
           <h1>실시간 가상화폐 순위</h1>
           <button onClick={ refreshPage }><span className="material-symbols-outlined">refresh</span></button>
-          <div><input onClick={chartHandle} type="checkbox"/><label>그래프 보기</label></div>
+          <div><input onClick={chartHandle} type="checkbox" /><label>테이블</label></div>
         </header>
-        <section>
+        {//chart 상태가 true이면 테이블 false이면 그래프
+          chart ? (
+            <Graph></Graph>
+          ) : (
+            <section>
         
           {
             loading ? <div className="loaingArea"><div className="img"></div></div> :
@@ -52,6 +62,7 @@ const Chart = () => {
               </div>
 
               {
+                //coins에 저장된 배열값을 map으로 반복
                 coins.map((coin,idx)=>(
                   <div key={idx} className="column-item">
                     <div style={{width:"4%"}}>{coin.rank}</div>
@@ -70,6 +81,10 @@ const Chart = () => {
             )
           }
         </section>
+
+          )  
+        }
+        
         
       </Container>
     )
@@ -154,7 +169,6 @@ const Container = styled.div`
           transform: rotate(360deg);
       }
   }
-
 
   .loaingArea{
     display: flex;
